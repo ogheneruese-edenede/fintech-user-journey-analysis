@@ -1,4 +1,4 @@
-# Fintech User Journey Analysis
+# Fintech User Journey Analysis: From Sign Up to Retention
 
 ## SECTION 1: INTRODUCTION
 
