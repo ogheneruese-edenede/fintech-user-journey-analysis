@@ -22,7 +22,7 @@ On the surface, the app looks healthy: users and monthly activity grow every mon
 
 ## SECTION 2: DATA OVERVIEW
 
-The is a synthethic dataset containing 5,000 users who joined between 1 November 2025 and 31 October 2026, 74,023 logged events (73,290 once duplicates are removed), and 20,894 transactions, spread across four countries, three plans, and four acquisition channels.
+The is a synthetic dataset containing 5,000 users who joined between 1 November 2025 and 31 October 2026, 74,023 logged events (73,290 once duplicates are removed), and 20,894 transactions, spread across four countries, three plans, and four acquisition channels.
 
 ### Tools Used
 
@@ -68,9 +68,9 @@ The is a synthethic dataset containing 5,000 users who joined between 1 November
 
 The data moved through a staged pipeline, with the original copy kept untouched at the start:
 
-1. **Data Base Creation:** Imported the three CSV files as-is into a staging schema using the SSMS Import Flat File wizard (Untouched copy: 5,000 users, 74,023 events, 20,894 transactions).
-2. **Type:** Created typed dbo tables with primary and foreign keys, converting IDs to integers, dates to DATE, and amounts to DECIMAL(12,2) using CAST and TRY_CAST (bad values become NULL instead of breaking the load).
-3. **Standardise:** Trimmed stray spaces (e.g., `"Free "` became `"Free"`) and fixed inconsistent casing (e.g., `"nigeria"` to `"Nigeria"`) to ensure one spelling per plan, channel, and country.
+1. **Staging Import:** Imported the three CSV files as-is into a staging schema using the SSMS Import Flat File wizard (Untouched copy: 5,000 users, 74,023 events, 20,894 transactions).
+2. **Typing:** Created typed dbo tables with primary and foreign keys, converting IDs to integers, dates to DATE, and amounts to DECIMAL(12,2) using CAST and TRY_CAST (bad values become NULL instead of breaking the load).
+3. **Standardisation:** Trimmed stray spaces (e.g., `"Free "` became `"Free"`) and fixed inconsistent casing (e.g., `"nigeria"` to `"Nigeria"`) to ensure one spelling per plan, channel, and country.
 4. **Fill the gaps:** Labelled 100 missing countries as `"Unknown"` and left 209 missing transaction amounts as NULL.
 5. **Removed duplicates:** Removed repeated event rows using `ROW_NUMBER()` partitioned by `event_id` (733 duplicates removed, leaving 73,290 events).
 6. **Shape:** Built `vw_UserSummary` (one row per user with funnel dates, cohort month, activation, and churn flags), plus `vw_Funnel`, `vw_CohortRetention`, and `vw_FeatureAdoption`.
@@ -97,7 +97,7 @@ The data moved through a staged pipeline, with the original copy kept untouched 
 | Monetise | Success rate | 96.09% |
 | Monetise | Average transaction | ₦11.55K |
 
-Growth is real, with monthly active users multiplying roughly fourteen-fold over the year, but it is driven by volume. Only 44.3% of signups complete a transaction, and the activity that exists is concentrated in one country and one plan.
+The scorecard shows a product that gets people in but struggles to keep themGrowth is real, with monthly active users multiplying roughly fourteen-fold over the year, but it is driven by volume. Only 44.3% of signups complete a transaction, and the activity that exists is concentrated in one country and one plan.
 
 ---
 
@@ -130,7 +130,7 @@ Only about 7 percentage points separate the best channel from the worst. Where a
 
 ### 3. Plans and Markets
 
-Plan type is a far stronger signal than channel for both churn and value:
+Plan type separates users more sharply than acquisition channel does, in both churn and value:
 
 - **Free Plan:** 3,508 users (70.2% share) | 42.3% churn | ₦70M transaction value | ~₦20K value per user
 - **Premium Plan:** 1,095 users (21.9% share) | 29.9% churn | ₦71M transaction value | ~₦65K value per user
@@ -147,14 +147,13 @@ Users peak one month after signup and then fade at a steady pace:
 - Month 1 retention ranges from 40.4% (Jan 2026 cohort) to 49.7% (Mar 2026 cohort).
 - The Nov 2025 cohort falls from 40.7% in month 1 to 8.4% in month 11.
 - Month 0 is lower (about 32% to 39%), representing an onboarding delay rather than real loss.
-- A total of 845 users (38.1% of those ever active) have been inactive since 1 October.
+- A total of 845 users (38.1% of those ever active) have been inactive since 1 October 2026.
 
-After the initial month 1 peak, retention drops by roughly 3 to 4 percentage points each month, pointing to gradual disengagement. Month 1 retention shows no clear trend over time, confirming that cohort quality has remained static.
+After the initial month 1 peak, retention drops by roughly 3 to 4 percentage points each month, pointing to gradual disengagement. Month 1 retention shows no clear trend over time, suggesting cohort quality has stayed broadly stable.
 
 ### 5. Feature Usage
 
-Two features carry the habit, while two are barely discovered (measured by adoption among activated users):
-
+Two features carry the habit, while two are used by fewer than half of activated users (measured by adoption among activated users):
 - **Transfers:** 81.8%
 - **Bill Pay:** 71.5%
 - **Savings:** 55.1%
@@ -171,7 +170,7 @@ Value grows with the number of active users, driven largely by Transfers and Bus
 - **Monthly Volume:** Monthly value rises from ~₦2M in November 2025 to ~₦39M in October 2026.
 - **Success Rate:** 96.09% of all transactions succeed.
 
-Value growth tracks active user growth, meaning revenue increases by adding people rather than increasing individual spending. The 3.91% failure rate (about 1 in 26 transactions) is a steady source of lost trust.
+Value growth tracks active user growth, which suggests transaction value is rising mainly because more users are transacting and not because each transaction is larger. The 3.91% failure rate (about 1 in 26 transactions) is a steady source of lost trust.
 
 ### Funnel and Retention
 
@@ -188,7 +187,7 @@ Value growth tracks active user growth, meaning revenue increases by adding peop
 4. **Free plan is vulnerable:** Holds 70% of users and churns at 42.3%, compared to ~30% for paid plans.
 5. **Acquisition channel has low variance:** Referral leads (48.6%) and Paid Ads trails (41.6%), a spread of only 7 points.
 6. **Core habit features:** Transfers (81.8%) and Bill Pay (71.5%) drive engagement; Investments trails (38.2%).
-7. **Business users drive key revenue:** 8% of users generate ₦89M (~₦224K per user vs. ~₦20K for Free users).
+7. **Business users carry outsized value:** 8% of users generate ₦89M (about 39% of transaction value), roughly ₦224K per user vs. ~₦20K for Free users.
 8. **Value tracks volume:** Total volume scales with active users up to ₦39M/month, with a 96.09% transaction success rate.
 9. **Geographic concentration:** Nigeria accounts for nearly half (48.5%) of the user base.
 
@@ -205,7 +204,7 @@ Value growth tracks active user growth, meaning revenue increases by adding peop
 - **Optimize acquisition channel spend:** Strengthen referral rewards and re-evaluate Paid Ads ROI before scaling acquisition spend. Target: Improve channel-specific activation rates.
 - **Feature discovery campaigns:** Cross-promote Virtual Cards and Investments to active users who rely solely on Transfers. Target: Increase feature adoption and long-term retention.
 - **Infrastructure diagnostics:** Analyze the 3.9% failure rate by transaction type and plan to resolve technical bottlenecks. Target: Raise transaction success rate above 98%.
-- **B2B / High-value retention:** Introduce dedicated support and tailored perks for Business plan subscribers. Target: Maintain low churn and maximize value per user.
+- **High-value retention:** Introduce dedicated support and tailored perks for Business plan subscribers. Target: Maintain low churn and maximize value per user.
 
 #### Long-Term Priority
 
@@ -213,10 +212,11 @@ Value growth tracks active user growth, meaning revenue increases by adding peop
 
 ### Limitations
 
-- **Fictional Data:** Data is synthetic.
+- **Fictional Data:** Dataset is synthetic.
 - **Currency Formatting:** Naira (₦) is an illustrative display format; multi-currency operations were not modeled.
 - **Short Observation Window:** 12 months of cohort data leaves recent cohorts with limited historical tracking.
 - **Static Churn Definition:** Churn is strictly defined as no login within the final 30 days (since 1 October 2026).
+- **Missing values:** 100 users have no country and 209 transactions have no amount (excluded from value figures).
 
 ---
 
