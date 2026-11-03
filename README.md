@@ -104,7 +104,7 @@ Growth is real, with monthly active users multiplying roughly fourteen-fold over
 ## SECTION 4:PERFORMANC BREAKDOWN
 
 ### Overview
-![Overview](images/fintech-user-journey-overview-and-transactions.png)
+![Overview](fintech-user-journey-overview-and-transactions.png)
 
 ### 1. The Onboarding Path
 
@@ -178,7 +178,7 @@ Value growth tracks active user growth, meaning revenue increases by adding peop
 ## SECTION 5: FINDINGS AND RECOMMENDATIONS
 ### Funnel and Retention
 
-![Funnel and Retention](images/fintech-user-journey-funnel-and-retention.png)
+![Funnel and Retention](fintech-user-journey-funnel-and-retention.png)
 
 ### Key Findings
 
