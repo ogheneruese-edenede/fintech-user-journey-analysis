@@ -173,12 +173,12 @@ Value grows with the number of active users, driven largely by Transfers and Bus
 
 Value growth tracks active user growth, meaning revenue increases by adding people rather than increasing individual spending. The 3.91% failure rate (about 1 in 26 transactions) is a steady source of lost trust.
 
----
-
-## SECTION 5: FINDINGS AND RECOMMENDATIONS
 ### Funnel and Retention
 
 ![Funnel and Retention](fintech-user-journey-funnel-and-retention.png)
+
+
+## SECTION 5: FINDINGS AND RECOMMENDATIONS
 
 ### Key Findings
 
