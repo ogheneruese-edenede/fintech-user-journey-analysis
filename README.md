@@ -68,7 +68,7 @@ The is a synthethic dataset containing 5,000 users who joined between 1 November
 
 The data moved through a staged pipeline, with the original copy kept untouched at the start:
 
-1. **Land:** Imported the three CSV files as-is into a staging schema using the SSMS Import Flat File wizard (Untouched copy: 5,000 users, 74,023 events, 20,894 transactions).
+1. **Data Base Creation:** Imported the three CSV files as-is into a staging schema using the SSMS Import Flat File wizard (Untouched copy: 5,000 users, 74,023 events, 20,894 transactions).
 2. **Type:** Created typed dbo tables with primary and foreign keys, converting IDs to integers, dates to DATE, and amounts to DECIMAL(12,2) using CAST and TRY_CAST (bad values become NULL instead of breaking the load).
 3. **Standardise:** Trimmed stray spaces (e.g., `"Free "` became `"Free"`) and fixed inconsistent casing (e.g., `"nigeria"` to `"Nigeria"`) to ensure one spelling per plan, channel, and country.
 4. **Fill the gaps:** Labelled 100 missing countries as `"Unknown"` and left 209 missing transaction amounts as NULL.
