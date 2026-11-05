@@ -97,7 +97,7 @@ The data moved through a staged pipeline, with the original copy kept untouched 
 | Monetise | Success rate | 96.09% |
 | Monetise | Average transaction | ₦11.55K |
 
-The scorecard shows a product that gets people in but struggles to keep themGrowth is real, with monthly active users multiplying roughly fourteen-fold over the year, but it is driven by volume. Only 44.3% of signups complete a transaction, and the activity that exists is concentrated in one country and one plan.
+The scorecard shows a product that gets people in but struggles to keep them. Growth is real, with monthly active users multiplying roughly fourteen-fold over the year, but it is driven by volume. Only 44.3% of signups complete a transaction, and the activity that exists is concentrated in one country and one plan.
 
 ---
 
